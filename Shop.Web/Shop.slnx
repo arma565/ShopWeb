@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="../Shop.Application/Shop.Application.csproj" Id="0fd9a780-6654-42a3-84a1-a565df4dfee3" />
+  <Project Path="../Shop.Domain/Shop.Domain.csproj" Id="74dc2cf3-46a5-4344-ae54-a019f29a781b" />
+  <Project Path="../Shop.Infrastructure/Shop.Infrastructure.csproj" Id="c6e4f283-4262-4ac1-887b-8dcde8724d4e" />
+  <Project Path="../UnitTests/UnitTests.csproj" Id="0c705393-7026-4be2-9000-219330673379" />
+  <Project Path="Shop.Web.csproj" />
+</Solution>
