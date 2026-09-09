@@ -1,18 +1,17 @@
-﻿using Shop.Entities.Users;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.DTOs.Users;
+namespace Shop.Application.DTOs.Users;
 
-public class Register : ApplicationUser
+public class Register
 {
     [DefaultValue("")]
     [Required(ErrorMessage = "Username is required!")]
-    public override required string? UserName { get => base.UserName; set => base.UserName = value; }
+    public required string? UserName { get; set; }
 
     [DefaultValue("")]
     [Required(ErrorMessage = "Email is required!")]
-    public override required string? Email { get => base.Email; set => base.Email = value; }
+    public required string? Email { get; set; }
 
     [DefaultValue("")]
     [Required(ErrorMessage = "Password is required!")]
