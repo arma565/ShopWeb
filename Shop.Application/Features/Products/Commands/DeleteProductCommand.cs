@@ -1,5 +1,5 @@
 ﻿namespace Shop.Application.Features.Products.Commands;
 
-internal class DeleteProductCommand
+internal class DeleteProductCommandHandler
 {
 }

@@ -1,5 +1,5 @@
 ﻿namespace Shop.Application.Features.Users.Queries;
 
-public class GetUserQuery
+public class GetUserByIdQuery
 {
 }
