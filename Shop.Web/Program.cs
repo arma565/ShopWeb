@@ -1,15 +1,15 @@
-using Shop.Infrastructure.Data.Configurations;
+using Shop.Infrastructure.Data.EFCore.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 //Database services
-builder.Services.AddDbConfiguration(builder.Configuration);
+builder.Services.AddShopDbConfiguration(builder.Configuration);
 
-//Authentication
-builder.Services.AddAuthenticationConfiguration(builder.Configuration);
+//Identity services
+builder.Services.AddIdentityConfiguration(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -22,6 +22,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -34,5 +36,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapRazorPages();
 
 app.Run();

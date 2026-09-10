@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Features.Authentications.Commands;
+﻿namespace Shop.Application.Features.Orders.Commands;
 
 internal class CreateOrderCommand
 {

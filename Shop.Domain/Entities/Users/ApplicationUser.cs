@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Shop.Infrastructure.Identity;
+namespace Shop.Domain.Entities.Users;
 
-internal class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<Guid>
 {
     public string? FirstName { get; set; }
 

@@ -1,5 +1,5 @@
-﻿namespace Shop.Application.Features.Authentications.Queries;
+﻿namespace Shop.Application.Features.Products.Queries;
 
-internal class GetOrderQuery
+public class GetProductQuery
 {
 }

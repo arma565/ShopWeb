@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Application.DTOs.Users;
+namespace Shop.Web.Models.Users;
 
-public class Register
+public class RegisterUserViewModel
 {
     [DefaultValue("")]
     [Required(ErrorMessage = "Username is required!")]
