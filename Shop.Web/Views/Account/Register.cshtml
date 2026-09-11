@@ -1,0 +1,49 @@
+﻿@model Shop.Web.Models.Account.RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form asp-controller="Account" asp-action="Register" method="post">
+
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label asp-for="ConfirmedPassword"></label>
+        <input asp-for="ConfirmedPassword" type="password" />
+        <span asp-validation-for="ConfirmedPassword"></span>
+    </div>
+
+    <div>
+        <input asp-for="AcceptedTermsAndConditions" type="checkbox" />
+        <label asp-for="AcceptedTermsAndConditions">
+            I accept the terms and conditions
+        </label>
+      
+        <span asp-validation-for="AcceptedTermsAndConditions"></span>
+    </div>
+
+    <div asp-validation-summary="ModelOnly">
+    </div>
+
+    <button type="submit">Register</button>
+
+</form>

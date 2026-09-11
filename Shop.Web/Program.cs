@@ -1,14 +1,24 @@
+using Shop.Infrastructure.Configurations;
 using Shop.Infrastructure.Data.EFCore.Configurations;
+using Shop.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-//Database services
+//Database service
 builder.Services.AddShopDbConfiguration(builder.Configuration);
 
-//Identity services
+//Identity service
 builder.Services.AddIdentityConfiguration(builder.Configuration);
+
+//MediatR service
+builder.Services.AddMediatRConfiguration();
+
+builder.Services.AddInfrastructureServices();
+
+//Razor Pages service
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();

@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using Shop.Application.Features.Users.Commands;
 
-namespace Shop.Application.Features.Users.Validators;
+namespace Shop.Application.Features.Users.Commands;
 
-public class RegisterUserValidator : AbstractValidator<RegisterUserCommand>
+public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
-    public RegisterUserValidator() {
+    public RegisterUserCommandValidator() {
         
         RuleFor(registerUserCommand => registerUserCommand.UserName)
             .NotEmpty()

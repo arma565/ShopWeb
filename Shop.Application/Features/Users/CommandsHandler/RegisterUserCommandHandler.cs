@@ -3,7 +3,7 @@ using Shop.Application.Common;
 using Shop.Application.Features.Users.Commands;
 using Shop.Application.Interfaces;
 
-namespace Shop.Application.Features.Users.Handlers;
+namespace Shop.Application.Features.Users.CommandsHandler;
 
 public class RegisterUserCommandHandler(IUserService userService) : IRequestHandler<RegisterUserCommand, Result>
 {

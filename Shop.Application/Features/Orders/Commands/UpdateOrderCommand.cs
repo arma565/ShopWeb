@@ -1,5 +1,5 @@
 ﻿namespace Shop.Application.Features.Orders.Commands;
 
-internal class UpdateOrderCommandHandler
+internal class UpdateOrderCommand
 {
 }
