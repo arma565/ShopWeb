@@ -14,8 +14,8 @@ public class Result
     public static Result Success()
     => new(true, null);
 
-    public static Result Failure(string error)
-        => new(false, error);
+    public static Result Failure(IEnumerable<string> errors)
+        => new(false, string.Join(", ", errors));
 
 }
 

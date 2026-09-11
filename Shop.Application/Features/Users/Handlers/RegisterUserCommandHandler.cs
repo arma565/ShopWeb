@@ -13,9 +13,7 @@ public class RegisterUserCommandHandler(IUserService userService) : IRequestHand
         return await _userService.CreateUserAsync(
                 command.UserName,
                 command.Email,
-                command.Password,
-                command.ConfirmedPassword,
-                command.AcceptedTermsAndConditions
+                command.Password
             );
     }
 }
