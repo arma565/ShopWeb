@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Shop.Application.Common;
-using Shop.Application.Features.Users.Commands;
+using Shop.Application.Features.Users.Commands.Register;
 using Shop.Application.Interfaces;
 
 namespace Shop.Application.Features.Users.CommandsHandler;
@@ -13,7 +13,8 @@ public class RegisterUserCommandHandler(IUserService userService) : IRequestHand
         return await _userService.CreateUserAsync(
                 command.UserName,
                 command.Email,
-                command.Password
+                command.Password,
+                cancellationToken
             );
     }
 }

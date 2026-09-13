@@ -1,30 +1,76 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Shop.Application.Common;
+using Shop.Application.Features.Users.Authentication;
 using Shop.Application.Interfaces;
-using Shop.Domain.Entities.Users;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Infrastructure.Identity;
 
-public class UserService(UserManager<ApplicationUser> userManager) : IUserService
+public class UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager = userManager;
-    public async Task<Result> CreateUserAsync(string UserName, string Email, string Password)
+    private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
+
+    public async Task<Result> CreateUserAsync(string userName, string email, string password, CancellationToken cancellationToken)
     {
         var user = new ApplicationUser
         {
-            UserName = UserName,
-            Email = Email
+            UserName = userName,
+            Email = email
         };
 
-        var result = _userManager.CreateAsync(user, Password).Result;
-        
-        if(result.Succeeded)
-        {
+        var result = _userManager.CreateAsync(user, password).Result;
+
+        if (result.Succeeded)
             return Result.Success();
-        }
 
         var errors = result.Errors.Select(error => error.Description).ToList();
 
         return Result.Failure(errors);
     }
+
+    public async Task<Result<LoginResult>> LoginUserAsync(string userNameOrEmail, string password, CancellationToken cancellationToken)
+    {
+        ApplicationUser? user;
+
+        if (IsEmail(userNameOrEmail))
+        {
+            user = await _userManager.FindByEmailAsync(userNameOrEmail).ConfigureAwait(false);
+        }
+        else
+        {
+            user = await _userManager.FindByNameAsync(userNameOrEmail).ConfigureAwait(false);
+        }
+
+        if (user == null)
+            return Result<LoginResult>.Failure(["Invalid username/email or password!"]);
+
+        if (user.IsDisabled)
+        {
+            return Result<LoginResult>.Failure(
+            [
+                "Your account has been disabled."
+            ]);
+        }
+
+        var signInResult = await _signInManager.CheckPasswordSignInAsync(
+      user,
+      password,
+      lockoutOnFailure: true);
+
+        if (!signInResult.Succeeded)
+        {
+            return Result<LoginResult>.Failure(
+                ["Invalid username/email or password."]);
+        }
+
+        var loginResult = new LoginResult(
+        user.Id,
+        user.UserName!);
+
+        return Result<LoginResult>.Success(loginResult);
+    }
+
+    private static bool IsEmail(string value) => new EmailAddressAttribute().IsValid(value);
+
 }

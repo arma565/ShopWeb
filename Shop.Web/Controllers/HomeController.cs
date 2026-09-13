@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Models;
 using System.Diagnostics;
 
-namespace Shop.Controllers
+namespace Shop.Web.Controllers
 {
     public class HomeController : Controller
     {

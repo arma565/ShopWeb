@@ -9,7 +9,7 @@ public static class ShopDbConfiguration
     public static IServiceCollection AddShopDbConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
 
-        var connectionString = configuration.GetConnectionString("ShopDbConnection") ?? throw new ArgumentNullException("ShopDbConnection");
+        var connectionString = configuration.GetConnectionString("ShopDbConnection") ?? throw new ArgumentNullException();
 
         services.AddDbContext<ShopDbContext>(options =>
         {

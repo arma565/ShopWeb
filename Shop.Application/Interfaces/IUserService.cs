@@ -1,11 +1,18 @@
 ﻿using Shop.Application.Common;
+using Shop.Application.Features.Users.Authentication;
 
 namespace Shop.Application.Interfaces;
 
 public interface IUserService
 {
     Task<Result> CreateUserAsync(
-     string UserName,
-     string Email,
-     string Password);
+     string userName,
+     string email,
+     string password,
+     CancellationToken cancellationToken);
+
+    Task<Result<LoginResult>> LoginUserAsync(
+      string userNameOrEmail,
+      string password,
+      CancellationToken cancellationToken);
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Domain.Entities.Users;
+using Shop.Infrastructure.Identity;
 
 namespace Shop.Infrastructure.Data.EFCore.Configurations;
 
@@ -12,13 +12,16 @@ public static class IdentityConfiguration
         services.AddIdentityCore<ApplicationUser>(options =>
         {
             options.User.RequireUniqueEmail = true;
-           
-
             options.Password.RequiredLength = 8;
             options.Password.RequireDigit = true;
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
             options.Password.RequireNonAlphanumeric = true;
+
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            options.Lockout.AllowedForNewUsers = true;
+
         })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ShopDbContext>()

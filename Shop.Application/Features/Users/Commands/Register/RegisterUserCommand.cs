@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Application.Common;
 
-namespace Shop.Application.Features.Users.Commands;
+namespace Shop.Application.Features.Users.Commands.Register;
 
 public sealed record RegisterUserCommand(
      string UserName,

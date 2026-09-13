@@ -5,7 +5,7 @@ public class Result
     public bool IsSuccess { get; }
     public string? Error { get; }
 
-    private Result(bool isSuccess, string? error)
+    protected Result(bool isSuccess, string? error)
     {
         IsSuccess = isSuccess;
         Error = error;
@@ -19,3 +19,17 @@ public class Result
 
 }
 
+public class Result<T> : Result {
+    public T? Data { get; }
+
+    private Result(bool isSuccess, T? data, string? error): base(isSuccess, error)
+    {
+        Data = data;
+    }
+
+    public static Result<T> Success(T data)
+        => new(true, data, null);
+
+    public static Result<T> Failure(IEnumerable<string> errors)
+        => new(false, default, string.Join(", ", errors));
+}
