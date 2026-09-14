@@ -39,7 +39,10 @@
     <div class="mb-3 form-check">
         <input asp-for="AcceptedTermsAndConditions" type="checkbox" class="form-check-input">
         <label asp-for="AcceptedTermsAndConditions" class="form-check-label"> Agree to terms and conditions </label>
-        <span asp-validation-for="AcceptedTermsAndConditions"></span>
+        <div class="mb-3">
+            <span asp-validation-for="AcceptedTermsAndConditions"></span>
+        </div>
+       
     </div>
 
     <div class="col-12">

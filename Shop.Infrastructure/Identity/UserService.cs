@@ -10,6 +10,7 @@ public class UserService(UserManager<ApplicationUser> userManager, SignInManager
 {
     private readonly UserManager<ApplicationUser> _userManager = userManager;
     private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
+    private const string InvalidCredentialsMessage = "Invalid username/email or password!";
 
     public async Task<Result> CreateUserAsync(string userName, string email, string password, CancellationToken cancellationToken)
     {
@@ -43,13 +44,13 @@ public class UserService(UserManager<ApplicationUser> userManager, SignInManager
         }
 
         if (user == null)
-            return Result<LoginResult>.Failure(["Invalid username/email or password!"]);
+            return Result<LoginResult>.Failure([InvalidCredentialsMessage]);
 
         if (user.IsDisabled)
         {
             return Result<LoginResult>.Failure(
             [
-                "Your account has been disabled."
+                InvalidCredentialsMessage
             ]);
         }
 
@@ -61,7 +62,7 @@ public class UserService(UserManager<ApplicationUser> userManager, SignInManager
         if (!signInResult.Succeeded)
         {
             return Result<LoginResult>.Failure(
-                ["Invalid username/email or password."]);
+                [InvalidCredentialsMessage]);
         }
 
         var loginResult = new LoginResult(
