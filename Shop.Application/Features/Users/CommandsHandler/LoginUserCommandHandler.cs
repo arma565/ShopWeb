@@ -10,10 +10,8 @@ public class LoginUserCommandHandler(IUserService userService) : IRequestHandler
 {
     private readonly IUserService _userService = userService;
     public async Task<Result<LoginResult>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
-    {
-       return await _userService.LoginUserAsync(
+      => await _userService.LoginUserAsync(
             request.UserNameOrEmail,
             request.Password,
             cancellationToken);
-    }
 }

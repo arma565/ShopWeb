@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Features.Users.Commands.Login;
+using Shop.Application.Features.Users.Commands.Logout;
 using Shop.Application.Features.Users.Commands.Register;
 using Shop.Web.Models.Account;
 using System.Security.Claims;
@@ -77,6 +78,14 @@ public class AccountController(ISender sender) : Controller
         await SignIn(result.Data!.UserId.ToString(), result.Data!.UserName, model.RememberMe);
 
         return RedirectToAction(nameof(Index), "/");
+    }
+
+    [HttpPost]
+    [AutoValidateAntiforgeryToken]
+    public async Task Logout(CancellationToken cancellationToken)
+    {
+        await _sender.Send(new LogoutUserCommand(), cancellationToken);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
     private async Task SignIn(string userId, string username, bool rememberMe)

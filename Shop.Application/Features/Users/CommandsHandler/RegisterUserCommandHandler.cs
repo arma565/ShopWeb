@@ -9,12 +9,10 @@ public class RegisterUserCommandHandler(IUserService userService) : IRequestHand
 {
     private readonly IUserService _userService = userService;
     public async Task<Result> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
-    {
-        return await _userService.CreateUserAsync(
+        => await _userService.CreateUserAsync(
                 command.UserName,
                 command.Email,
                 command.Password,
                 cancellationToken
             );
-    }
 }

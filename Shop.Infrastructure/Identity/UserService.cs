@@ -72,6 +72,8 @@ public class UserService(UserManager<ApplicationUser> userManager, SignInManager
         return Result<LoginResult>.Success(loginResult);
     }
 
+    public async Task LogoutUserAsync(CancellationToken cancellationToken)
+         => await _signInManager.SignOutAsync().ConfigureAwait(false);
+    
     private static bool IsEmail(string value) => new EmailAddressAttribute().IsValid(value);
-
 }

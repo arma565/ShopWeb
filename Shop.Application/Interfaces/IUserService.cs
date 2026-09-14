@@ -15,4 +15,6 @@ public interface IUserService
       string userNameOrEmail,
       string password,
       CancellationToken cancellationToken);
+
+    Task LogoutUserAsync(CancellationToken cancellationToken);
 }
